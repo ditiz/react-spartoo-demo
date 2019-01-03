@@ -1,25 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, Fragment } from 'react';
+import Logo from './logo';
 import './App.css';
+import {
+  Link,
+  BrowserRouter as Router
+} from 'react-router-dom';
+
+import { Routing } from './routing'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+         <Logo className/>
+
+         <Router>
+          <Fragment>
+            <nav className="navbar navbar-dark bg-dark justify-content-center">
+              <Link to='/Page1' className='navbar-brand'>Page 1</Link>
+              <Link to='/Page2' className='navbar-brand'>Page 2</Link>
+              <Link to='/Page3' className='navbar-brand'>Page 3</Link>
+            </nav>
+
+            <Routing/>
+          </Fragment>
+        </Router>
       </div>
     );
   }
