@@ -10,7 +10,12 @@ export class StarWars extends Component {
     return (
       <div>
         <br/>
-        <h2>Démo en utilisant l'api <a href="https://swapi.co/">SWAPI</a></h2>
+        <h2>
+          Démo en utilisant l'api 
+          <a href="https://swapi.co/" target='_blank' rel="noopener noreferrer">
+            SWAPI
+          </a>
+        </h2>
 
         <br/>
 

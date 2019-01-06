@@ -9,59 +9,107 @@ export class Starship extends Component {
 			error: null,
 			starships: [],
 			nb: 0,
-			display: false
+			display: false,
+			next: false,
+			previous: false,
+			page: 1
 		};
 	}
 	
 	componentDidMount() {
-		fetch('https://swapi.co/api/starships/')
-		.then(res => res.json())
-		.then(
-			(res) => {
-				let starships = res.results;
-				
-				this.setState({
-					nb: res.count,
-					starships: starships,
-					display: true
-				});
-			}, (error) => {
-				alert("Tristesse");
-			}
-			)
-		}
-		
-		render() {
-			return (
-				<Fragment>
-					{ this.state.display ?
-					<div>
-						<h3>Nombre de Vaisseau {this.state.nb}</h3>
-						
-						<ul className="list">
-							<DisplayStarship starships={this.state.starships}/>
-						</ul>
-					</div>
-					:
-					<div>
-						<LoaderStarWars/>
-                    </div>
-					}
-				</Fragment>
-			)
-		}
+		this.getStarship(this.state.page);
 	}
-		
-		const DisplayStarship = (props) => {
-			if (props.starships) {
-				return props.starships.map(starship => {
-					return <li key={starship.name}>
-						{starship.name} | 
-                        Prix: {starship.cost_in_credits} crédit | 
-                        taille: {starship.length}m
-					</li>
-				});
-			} else {
-				return <div></div>
+
+	getStarship = (page) => {
+		fetch('https://swapi.co/api/starships/?page=' + page)
+		  .then(res => res.json())
+		  .then(
+			(res) => {
+			  let starships = res.results.map(e => e);
+	
+			  this.setState({
+				nb: res.count,
+				starships: starships,
+				display: true,
+				next: res.next,
+				previous: res.previous
+			  });
+			}, (error) => {
+			  alert("Tristesse");
 			}
+		  );
+	  }
+	
+	  previous = () => {
+		if (this.state.page === 1) {
+			return false;
 		}
+
+		this.setState({
+			page: this.state.page - 1,
+			display: false
+		}, () => this.getStarship(this.state.page));
+	  }
+	
+	  next = () => {
+		if ((this.state.page) * 10  >= this.state.nb) {
+			return false;
+		}
+
+		this.setState({
+			page: this.state.page + 1,
+			display: false
+		}, () => this.getStarship(this.state.page));
+	  }
+		
+	render() {
+		return (
+			<Fragment>
+			{ this.state.display ?
+				<div>
+					<h3>Nombre de Vaisseau {this.state.nb}</h3>
+					<small>Page {this.state.page}</small>
+				
+					<ul className="list">
+						<DisplayStarship starships={this.state.starships}/>
+					</ul>
+
+					<div className="btn-group">
+						{ this.state.previous && 
+							<button onClick={this.previous} className="btn btn-outline-primary">
+								Précédent
+							</button>
+						}
+
+						{ this.state.next && 
+							<button onClick={this.next} className="btn btn-outline-success">
+								Suivant
+							</button>
+						}
+					</div>
+				</div>
+				:
+				<div>
+					<LoaderStarWars/>
+				</div>
+			}
+
+			
+			</Fragment>
+		);
+	}
+}
+		
+const DisplayStarship = (props) => {
+	if (props.starships) {
+		return props.starships.map(starship => {
+			return <li key={starship.name}>
+			{starship.name} | 
+			Prix: {starship.cost_in_credits} crédit | 
+			taille: {starship.length}m
+			</li>
+		});
+	} else {
+		return <div></div>;
+	}
+}
