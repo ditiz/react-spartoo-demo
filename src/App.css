@@ -48,3 +48,8 @@
 .list {
   list-style: none;
 }
+
+.list-group-item-trueDark {
+  background: #282828;
+  color: white; 
+}

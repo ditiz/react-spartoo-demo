@@ -37,10 +37,10 @@ export class Starship extends Component {
 			}, (error) => {
 			  alert("Tristesse");
 			}
-		  );
-	  }
+		);
+	}
 	
-	  previous = () => {
+	previous = () => {
 		if (this.state.page === 1) {
 			return false;
 		}
@@ -49,9 +49,9 @@ export class Starship extends Component {
 			page: this.state.page - 1,
 			display: false
 		}, () => this.getStarship(this.state.page));
-	  }
-	
-	  next = () => {
+	}
+
+	next = () => {
 		if ((this.state.page) * 10  >= this.state.nb) {
 			return false;
 		}
@@ -60,7 +60,7 @@ export class Starship extends Component {
 			page: this.state.page + 1,
 			display: false
 		}, () => this.getStarship(this.state.page));
-	  }
+	}
 		
 	render() {
 		return (

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Logo from './logo';
-import './App.css';
 import './bootstrap.min.css';
+import './App.css';
 import {
   Link,
   BrowserRouter as Router

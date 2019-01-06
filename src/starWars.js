@@ -11,8 +11,7 @@ export class StarWars extends Component {
       <div>
         <br/>
         <h2>
-          Démo en utilisant l'api 
-          <a href="https://swapi.co/" target='_blank' rel="noopener noreferrer">
+          Démo en utilisant l'api <a href="https://swapi.co/" target='_blank' rel="noopener noreferrer">
             SWAPI
           </a>
         </h2>
@@ -23,13 +22,13 @@ export class StarWars extends Component {
           <div className="d-flex justify-content-around">
 
             <ul className="list-group">
-              <li className="list-group-item list-group-item-dark">
+              <li className="list-group-item list-group-item-trueDark">
                 <Link to="/star-wars/people" >Personnage</Link>
               </li>
-              <li className="list-group-item list-group-item-dark"
+              <li className="list-group-item list-group-item-trueDark"
                 ><Link to="/star-wars/planet">Planète</Link>
               </li>
-              <li className="list-group-item list-group-item-dark">
+              <li className="list-group-item list-group-item-trueDark">
                 <Link to="/star-wars/starship">Vaisseau</Link>
               </li>
             </ul>
