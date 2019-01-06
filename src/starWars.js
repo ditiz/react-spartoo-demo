@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 import { Perso } from './star-wars/Perso';
 import { Planet } from './star-wars/Planet';
-import { Page3 } from './page/page3';
+import { Starship } from './star-wars/Starship';
 
 export class StarWars extends Component {
   render() {
@@ -31,7 +31,7 @@ export class StarWars extends Component {
 
             <Route path="/star-wars/people" component={Perso}/>
             <Route path="/star-wars/planet" component={Planet}/>
-            <Route path="/star-wars/starship" component={Page3}/>
+            <Route path="/star-wars/starship" component={Starship}/>
 
           </div>
         </Router>

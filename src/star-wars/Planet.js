@@ -6,7 +6,7 @@ export class Planet extends Component {
 		
 		this.state = {
 			error: null,
-			persos: [],
+			planets: [],
 			nb: 0,
 			display: false
 		};
@@ -37,7 +37,7 @@ export class Planet extends Component {
 					<div>
 						<h3>Nombre de planète {this.state.nb}</h3>
 						
-						<ul>
+						<ul className="list">
 							<DisplayPlanet planets={this.state.planets}/>
 						</ul>
 					</div>

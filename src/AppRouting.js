@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 import { Route } from 'react-router-dom';
 
 import { Page1 } from './page/page1';
