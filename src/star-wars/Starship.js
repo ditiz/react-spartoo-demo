@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { LoaderStarWars } from './LoaderStarWars';
 
 export class Starship extends Component {
 	constructor(props) {
@@ -42,7 +43,9 @@ export class Starship extends Component {
 						</ul>
 					</div>
 					:
-					<div>ça charge</div>
+					<div>
+						<LoaderStarWars/>
+                    </div>
 					}
 				</Fragment>
 			)

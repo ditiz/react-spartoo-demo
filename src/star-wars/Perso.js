@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import loader from '../loader_star-wars.gif';
+import { LoaderStarWars } from './LoaderStarWars';
 
 export class Perso extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export class Perso extends Component {
           </div>
           :
           <div>
-
+            <LoaderStarWars/>
           </div>
         }
       </div>
