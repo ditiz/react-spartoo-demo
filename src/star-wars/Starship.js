@@ -24,7 +24,7 @@ export class Starship extends Component {
 		fetch('https://swapi.co/api/starships/?page=' + page)
 		  .then(res => res.json())
 		  .then((res) => {
-			  let starships = res.results.map(e => e);
+        let starships = res.results.map(e => e);
 	
 			  this.setState({
           nb: res.count,
@@ -63,15 +63,17 @@ export class Starship extends Component {
 	}
 		
 	render() {
-		let NextBtn, PreviousBtn, Render;
+    let NextBtn = () => <></>;
+    let PreviousBtn = () => <></>;
+    let Render = () => <></>;
 
-		if (this.state.previous || true) {
+		if (this.state.previous) {
 			PreviousBtn = () =>  <button onClick={this.previous} className="btn btn-outline-primary">
 				Précédent
 			</button>;
 		}
 
-    if (this.state.next || true) {
+    if (this.state.next) {
       NextBtn = () => <button onClick={this.next} className="btn btn-outline-success">
         Suivant
       </button>;
@@ -81,7 +83,7 @@ export class Starship extends Component {
       Render = () => <div>
         <h3>Nombre de Vaisseau {this.state.nb}</h3>
         <br/>
-        
+
         <table className="table table-hover">
             <thead className="">
               <th>Nom</th>
