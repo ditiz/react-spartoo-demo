@@ -15,24 +15,6 @@ export class Planet extends Component {
 			page: 1
 		};
 	}
-	
-	componentDidMount() {
-		fetch('https://swapi.co/api/planets/')
-		.then(res => res.json())
-		.then(
-			(res) => {
-				let planets = res.results;
-				
-				this.setState({
-					nb: res.count,
-					planets: planets,
-					display: true
-				});
-			}, (error) => {
-				alert("Winston, nous avons un problème");
-			}
-		);
-	}
 
 	componentDidMount() {
 		this.getPlanet(this.state.page);
@@ -87,7 +69,7 @@ export class Planet extends Component {
 				<div>
 					<h3>Nombre de planète {this.state.nb}</h3>
 					<br/>
-          
+
 					<table className="table table-hover">
             <thead className="">
               <th>Nom</th>
