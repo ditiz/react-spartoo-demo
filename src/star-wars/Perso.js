@@ -69,9 +69,17 @@ export class Perso extends Component {
           <div>
             <h3>Nombre de personnage {this.state.nb}</h3>
             <small>Page {this.state.page}</small>
-            <ul className="list">
-              <DisplayPersoName persos={this.state.persos}/>
-            </ul>
+
+            <table className="table table-hover">
+              <thead className="">
+                <th>Nom</th>
+                <th>Taille (m)</th>
+                <th>Masse (kg)</th>
+              </thead>
+              <tbody>
+                <DisplayPersoName persos={this.state.persos}/>
+              </tbody>
+            </table>
 
             <div className="btn-group">
               { this.state.previous && 
@@ -99,8 +107,10 @@ export class Perso extends Component {
 
 const DisplayPersoName = (props) => {
   return props.persos.map(perso => {
-    return <li key={perso.name}>
-      Nom: {perso.name} | Taille: {perso.height}m | poid: {perso.mass}kg
-    </li>
+    return <tr>
+      <td>{perso.name}</td>
+      <td>{perso.height}</td>
+      <td>{perso.mass}</td>
+    </tr>;
   });
 }

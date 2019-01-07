@@ -87,9 +87,16 @@ export class Planet extends Component {
 				<div>
 					<h3>Nombre de planète {this.state.nb}</h3>
 					
-					<ul className="list">
-						<DisplayPlanet planets={this.state.planets}/>
-					</ul>
+					<table className="table table-hover">
+            <thead className="">
+              <th>Nom</th>
+              <th>Taille (km)</th>
+              <th>Climat</th>
+            </thead>
+            <tbody>
+              <DisplayPlanet planets={this.state.planets}/>
+              </tbody>
+          </table>
 
 					<div className="btn-group">
 						{ this.state.previous && 
@@ -118,9 +125,11 @@ export class Planet extends Component {
 const DisplayPlanet = (props) => {
 	if (props.planets) {
 		return props.planets.map(planet => {
-			return <li key={planet.name}>
-				{planet.name} | taille: {planet.diameter} | climat: {planet.climate}
-			</li>
+      return <tr>
+        <td>{planet.name}</td>
+        <td>{planet.diameter}</td>
+        <td>{planet.climate}</td>
+      </tr>;
 		});
 	} else {
 		return <div></div>

@@ -23,17 +23,17 @@ export class Starship extends Component {
 	getStarship = (page) => {
 		fetch('https://swapi.co/api/starships/?page=' + page)
 		  .then(res => res.json())
-		  .then(
-			(res) => {
+		  .then((res) => {
 			  let starships = res.results.map(e => e);
 	
 			  this.setState({
-				nb: res.count,
-				starships: starships,
-				display: true,
-				next: res.next,
-				previous: res.previous
-			  });
+          nb: res.count,
+          starships: starships,
+          display: true,
+          next: res.next,
+          previous: res.previous
+        });
+        
 			}, (error) => {
 			  alert("Tristesse");
 			}
@@ -63,38 +63,50 @@ export class Starship extends Component {
 	}
 		
 	render() {
+		let NextBtn, PreviousBtn, Render;
+
+		if (this.state.previous || true) {
+			PreviousBtn = () =>  <button onClick={this.previous} className="btn btn-outline-primary">
+				Précédent
+			</button>;
+		}
+
+    if (this.state.next || true) {
+      NextBtn = () => <button onClick={this.next} className="btn btn-outline-success">
+        Suivant
+      </button>;
+    }
+
+    if (this.state.display) {
+      Render = () => <div>
+        <h3>Nombre de Vaisseau {this.state.nb}</h3>
+        <small>Page {this.state.page}</small>
+
+        <table className="table table-hover">
+            <thead className="">
+              <th>Nom</th>
+              <th>Prix (crédit)</th>
+              <th>Taille (m)</th>
+            </thead>
+            <tbody>
+             <DisplayStarship starships={this.state.starships}/>
+            </tbody>
+          </table>
+
+        <div className="btn-group">
+          <PreviousBtn/>
+          <NextBtn/>
+        </div>
+      </div>;
+    } else {
+      Render = () => <div>
+        <LoaderStarWars/>
+      </div>;
+    }
+
 		return (
 			<Fragment>
-			{ this.state.display ?
-				<div>
-					<h3>Nombre de Vaisseau {this.state.nb}</h3>
-					<small>Page {this.state.page}</small>
-				
-					<ul className="list">
-						<DisplayStarship starships={this.state.starships}/>
-					</ul>
-
-					<div className="btn-group">
-						{ this.state.previous && 
-							<button onClick={this.previous} className="btn btn-outline-primary">
-								Précédent
-							</button>
-						}
-
-						{ this.state.next && 
-							<button onClick={this.next} className="btn btn-outline-success">
-								Suivant
-							</button>
-						}
-					</div>
-				</div>
-				:
-				<div>
-					<LoaderStarWars/>
-				</div>
-			}
-
-			
+				<Render/>
 			</Fragment>
 		);
 	}
@@ -102,12 +114,12 @@ export class Starship extends Component {
 		
 const DisplayStarship = (props) => {
 	if (props.starships) {
-		return props.starships.map(starship => {
-			return <li key={starship.name}>
-			{starship.name} | 
-			Prix: {starship.cost_in_credits} crédit | 
-			taille: {starship.length}m
-			</li>
+		return props.starships.map(starship => { 
+      return <tr>
+        <td>{starship.name}</td>
+        <td>{starship.cost_in_credits}</td>
+        <td>{starship.length}</td>
+      </tr>;
 		});
 	} else {
 		return <div></div>;
