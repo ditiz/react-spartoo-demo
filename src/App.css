@@ -14,14 +14,6 @@
   animation: App-logo-spin infinite 20s linear;
 }
 
-.rotate-normal {
-  animation: App-logo-spin infinite 10s linear;
-}
-
-.rotate-fast {
-  animation: App-logo-spin infinite 1s linear;
-}
-
 .rotate-too-fast {
   animation: App-logo-spin infinite 0.5s linear;
 }
@@ -36,15 +28,6 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .list {
   list-style: none;
 }
@@ -52,4 +35,13 @@
 .list-group-item-trueDark {
   background: #282828;
   color: white; 
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

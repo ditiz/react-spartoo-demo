@@ -18,7 +18,7 @@ class Logo extends Component {
     return (
       <div className="logos">
         <img src={spartooLogoUrl} onClick={this.rotate} className="App-logo " alt="logo" />
-        <img src={logo} onClick={(e) =>this.rotate(e)} className="App-logo rotate-normal" alt="logo" />
+        <img src={logo} onClick={(e) =>this.rotate(e)} className="App-logo rotate-slow" alt="logo" />
       </div>
     )
   }

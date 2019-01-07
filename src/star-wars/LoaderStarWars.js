@@ -19,9 +19,14 @@ export class LoaderStarWars extends Component {
   }
   
   render() {
+    let style = {
+      height: '30vmin',
+      border: '1px solid #4b5a72'
+    };
+
     return (
       <div>
-        <img src={this.loader} alt='loader'/>
+        <img src={this.loader} style={style} alt='loader'/>
       </div>
       )
     }
