@@ -86,7 +86,8 @@ export class Planet extends Component {
 				{ this.state.display ?
 				<div>
 					<h3>Nombre de planète {this.state.nb}</h3>
-					
+					<br/>
+          
 					<table className="table table-hover">
             <thead className="">
               <th>Nom</th>
@@ -103,7 +104,11 @@ export class Planet extends Component {
 							<button onClick={this.previous} className="btn btn-outline-primary">
 								Précédent
 							</button>
-						}
+            }
+            
+            <button className="btn btn-light" disabled>
+              Page {this.state.page}
+            </button>
 
 						{ this.state.next && 
 							<button onClick={this.next} className="btn btn-outline-success">

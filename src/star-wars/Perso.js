@@ -68,8 +68,8 @@ export class Perso extends Component {
         { this.state.display ?
           <div>
             <h3>Nombre de personnage {this.state.nb}</h3>
-            <small>Page {this.state.page}</small>
-
+            <br/>
+            
             <table className="table table-hover">
               <thead className="">
                 <th>Nom</th>
@@ -87,6 +87,10 @@ export class Perso extends Component {
                   Précédent
                 </button>
               }
+
+              <button className="btn btn-light" disabled>
+                Page {this.state.page}
+              </button>
 
               { this.state.next && 
                 <button onClick={this.next} className="btn btn-outline-success">

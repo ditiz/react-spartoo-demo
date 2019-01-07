@@ -80,8 +80,8 @@ export class Starship extends Component {
     if (this.state.display) {
       Render = () => <div>
         <h3>Nombre de Vaisseau {this.state.nb}</h3>
-        <small>Page {this.state.page}</small>
-
+        <br/>
+        
         <table className="table table-hover">
             <thead className="">
               <th>Nom</th>
@@ -95,6 +95,9 @@ export class Starship extends Component {
 
         <div className="btn-group">
           <PreviousBtn/>
+          <button className="btn btn-light" disabled>
+            Page {this.state.page}
+          </button>
           <NextBtn/>
         </div>
       </div>;
