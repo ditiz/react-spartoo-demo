@@ -63,47 +63,58 @@ export class Planet extends Component {
 	}
 		
 	render() {
+
+		let NextBtn = () => <></>;
+    let PreviousBtn = () => <></>;
+		let Render = () => <></>;	
+
+		if (this.state.previous) {
+			PreviousBtn = () =>  <button onClick={this.previous} className="btn btn-outline-primary">
+				Précédent
+			</button>;
+		}
+
+    if (this.state.next) {
+      NextBtn = () => <button onClick={this.next} className="btn btn-outline-success">
+        Suivant
+      </button>;
+		}
+		
+		if (this.state.display) {
+			Render = () => <div>
+				<h3>Nombre de planète {this.state.nb}</h3>
+				<br/>
+
+				<table className="table table-hover">
+					<thead className="">
+						<tr>
+							<th>Nom</th>
+							<th>Taille (km)</th>
+							<th>Climat</th>
+						</tr>
+					</thead>
+					<tbody>
+						<DisplayPlanet planets={this.state.planets}/>
+						</tbody>
+				</table>
+
+				<div className="btn-group">
+					<PreviousBtn/>
+					<button className="btn btn-light" disabled>
+						Page {this.state.page}
+					</button>
+					<NextBtn/>
+				</div>
+			</div>;
+		} else {
+			Render = () => <div>
+				<LoaderStarWars/>
+			</div>;
+		}
+
 		return (
 			<Fragment>
-				{ this.state.display ?
-				<div>
-					<h3>Nombre de planète {this.state.nb}</h3>
-					<br/>
-
-					<table className="table table-hover">
-            <thead className="">
-              <th>Nom</th>
-              <th>Taille (km)</th>
-              <th>Climat</th>
-            </thead>
-            <tbody>
-              <DisplayPlanet planets={this.state.planets}/>
-              </tbody>
-          </table>
-
-					<div className="btn-group">
-						{ this.state.previous && 
-							<button onClick={this.previous} className="btn btn-outline-primary">
-								Précédent
-							</button>
-            }
-            
-            <button className="btn btn-light" disabled>
-              Page {this.state.page}
-            </button>
-
-						{ this.state.next && 
-							<button onClick={this.next} className="btn btn-outline-success">
-								Suivant
-							</button>
-						}
-					</div>
-				</div>
-				:
-				<div>
-					<LoaderStarWars/>
-				</div>
-				}
+				<Render/>
 			</Fragment>
 		)
 	}
@@ -112,7 +123,7 @@ export class Planet extends Component {
 const DisplayPlanet = (props) => {
 	if (props.planets) {
 		return props.planets.map(planet => {
-      return <tr>
+      return <tr key={planet.name}>
         <td>{planet.name}</td>
         <td>{planet.diameter}</td>
         <td>{planet.climate}</td>

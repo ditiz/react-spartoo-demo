@@ -63,9 +63,11 @@ export class Starship extends Component {
 	}
 		
 	render() {
+
     let NextBtn = () => <></>;
     let PreviousBtn = () => <></>;
-    let Render = () => <></>;
+		let Render = () => <></>;		
+		
 
 		if (this.state.previous) {
 			PreviousBtn = () =>  <button onClick={this.previous} className="btn btn-outline-primary">
@@ -86,9 +88,11 @@ export class Starship extends Component {
 
         <table className="table table-hover">
             <thead className="">
-              <th>Nom</th>
-              <th>Prix (crédit)</th>
-              <th>Taille (m)</th>
+							<tr>
+								<th>Nom</th>
+								<th>Prix (crédit)</th>
+								<th>Taille (m)</th>
+							</tr>
             </thead>
             <tbody>
              <DisplayStarship starships={this.state.starships}/>
@@ -120,7 +124,7 @@ export class Starship extends Component {
 const DisplayStarship = (props) => {
 	if (props.starships) {
 		return props.starships.map(starship => { 
-      return <tr>
+      return <tr key={starship.name}>
         <td>{starship.name}</td>
         <td>{starship.cost_in_credits}</td>
         <td>{starship.length}</td>

@@ -11,7 +11,7 @@ export class StarWars extends Component {
       <div>
         <br/>
         <h2>
-          Démo en utilisant l\'api <a href="https://swapi.co/" target='_blank' rel="noopener noreferrer">
+          Démo en utilisant l'api <a href="https://swapi.co/" target='_blank' rel="noopener noreferrer">
             SWAPI
           </a>
         </h2>
