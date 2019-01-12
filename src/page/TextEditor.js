@@ -323,14 +323,11 @@ const Toolbar = (props) => (
 
 
 const Icon = ({ icon, ...rest }) => {
-  console.log(icon, rest);
-  
   return <MaterialIcon icon={icon} />
 }
 
 const Button = (props) => (
   <button 
-    className=''
     {...props}
   >
     {props.children}

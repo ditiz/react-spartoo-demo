@@ -11,5 +11,3 @@ export class Page1 extends Component {
     )
   }
 }
-
-
