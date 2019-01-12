@@ -49,3 +49,24 @@ table {
     transform: rotate(360deg);
   }
 }
+
+
+/* Text editor */
+.textEditor {
+  margin: 1em auto;
+  width: 70%;
+  padding: 10px;
+  border: 2px solid grey;
+  text-align: start;
+}
+
+.format-toolbar {
+  display: flex;
+  border-bottom: solid 1px black;
+  padding: 10px 0;
+  margin: 0 0 10px 0;
+}
+
+.tooltop-icon-button {
+  border: 0;
+}
