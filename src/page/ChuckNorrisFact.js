@@ -9,32 +9,15 @@ export class ChuckNorrisFact extends Component {
   }
 
   componentDidMount() {
-    this.getFact();
-
-    setInterval(() => {
-      console.log(this.state.percent);
-      
-      if (this.state.percent > 0) {
-        this.setState({
-          percent: this.state.percent - 1
-        })
-      } else {
-        new Promise((resolve, reject) => {
-          this.getFact();
-          setTimeout(resolve(true), 5000)
-        }).then(this.setState({
-          percent: 100
-        }));
-      }
-    },100);
+    this.getFact().then(() => this.loop());
   }
 
   componentWillUnmount() {
-
+    clearInterval(this.state.loop);
   }
 
-  getFact = () => {
-    fetch('https://api.chucknorris.io/jokes/random')
+  getFact = async function() {
+    await fetch('https://api.chucknorris.io/jokes/random')
     .then (res => res.json())
     .then(res => {
       this.setState({
@@ -42,14 +25,32 @@ export class ChuckNorrisFact extends Component {
       });
       }, (error) => {
         alert('Chuck ne veut pas entrer en contact avec vous');
-      }
-    );
+      });
+  }
+
+  loop = () => {
+    this.setState({
+      loop : setInterval(() => {
+        console.log(this.state.percent);
+        
+        if (this.state.percent > 0) {
+          this.setState({
+            percent: this.state.percent - 1
+          })
+        } else {
+          this.getFact().then(
+            this.setState({
+              percent: 100
+            }));
+        }
+      },300)
+    });
   }
 
   render() {
     return (
-      <div>
-        <p>{this.state.fact}</p>
+      <Box>
+        <Fact>{this.state.fact}</Fact>
         <div className="progress" style={{'width': '25%', 'margin': 'auto'}}>
           <div 
             className="progress-bar" 
@@ -57,7 +58,28 @@ export class ChuckNorrisFact extends Component {
             style={{'width': this.state.percent + '%'}}
           ></div>
         </div>
-      </div>
+      </Box>
     )
   }
 }
+
+const Box = (props) => {
+  const style = {
+    'width': '60%',
+    'margin': 'auto'
+  }
+
+  return <div style={style}>
+    {props.children}
+  </div>
+}
+
+const Fact = (props) => {
+  const style = {
+    padding: "20px"
+  }
+
+  return <div style={style}>
+    {props.children}
+  </div>
+};
