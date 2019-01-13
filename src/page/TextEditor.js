@@ -4,7 +4,7 @@ import { Value } from 'slate'
 
 import React, { Component } from 'react'
 import { isKeyHotkey } from 'is-hotkey'
-import MaterialIcon, {colorPalette} from 'material-icons-react';
+import MaterialIcon from 'material-icons-react';
 
 const initialValue = Value.fromJSON({
   document: {
