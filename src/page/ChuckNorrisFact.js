@@ -5,7 +5,8 @@ export class ChuckNorrisFact extends Component {
   state = {
     fact: '',
     percent: 100,
-    loop: null
+    loop: null,
+    time: 0
   }
 
   componentDidMount() {
@@ -21,7 +22,8 @@ export class ChuckNorrisFact extends Component {
     .then (res => res.json())
     .then(res => {
       this.setState({
-        fact: res.value
+        fact: res.value,
+        time: res.value.length
       });
       }, (error) => {
         alert('Chuck ne veut pas entrer en contact avec vous');
@@ -29,9 +31,10 @@ export class ChuckNorrisFact extends Component {
   }
 
   loop = () => {
+    const time = this.state.time != 0 ? 300 : this.state.time ;
+
     this.setState({
       loop : setInterval(() => {
-        console.log(this.state.percent);
         
         if (this.state.percent > 0) {
           this.setState({
@@ -41,9 +44,10 @@ export class ChuckNorrisFact extends Component {
           this.getFact().then(
             this.setState({
               percent: 100
-            }));
+            })
+          ); 
         }
-      },300)
+      }, time * 0.4)
     });
   }
 
