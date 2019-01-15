@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { LoaderStarWars } from './LoaderStarWars';
 
 export class Starship extends Component {
@@ -63,60 +63,11 @@ export class Starship extends Component {
 	}
 		
 	render() {
-
-    let NextBtn = () => <></>;
-    let PreviousBtn = () => <></>;
-		let Render = () => <></>;		
-		
-
-		if (this.state.previous) {
-			PreviousBtn = () =>  <button onClick={this.previous} className="btn btn-outline-primary">
-				Précédent
-			</button>;
-		}
-
-    if (this.state.next) {
-      NextBtn = () => <button onClick={this.next} className="btn btn-outline-success">
-        Suivant
-      </button>;
-    }
-
-    if (this.state.display) {
-      Render = () => <div>
-        <h3>Nombre de Vaisseau {this.state.nb}</h3>
-        <br/>
-
-        <table className="table table-hover">
-            <thead className="">
-							<tr>
-								<th>Nom</th>
-								<th>Prix (crédit)</th>
-								<th>Taille (m)</th>
-							</tr>
-            </thead>
-            <tbody>
-             <DisplayStarship starships={this.state.starships}/>
-            </tbody>
-          </table>
-
-        <div className="btn-group">
-          <PreviousBtn/>
-          <button className="btn btn-light" disabled>
-            Page {this.state.page}
-          </button>
-          <NextBtn/>
-        </div>
-      </div>;
-    } else {
-      Render = () => <div>
-        <LoaderStarWars/>
-      </div>;
-    }
-
 		return (
-			<Fragment>
-				<Render/>
-			</Fragment>
+			<div >
+				<Content data={this.state}/>
+				<Btn previous={() => this.previous()} next={() => this.next()} data={this.state}/>
+			</div>
 		);
 	}
 }
@@ -134,3 +85,72 @@ const DisplayStarship = (props) => {
 		return <div></div>;
 	}
 }
+
+const Content = (props) => {
+	let data = props.data;
+
+	if (data.display) {
+		return <StarshipContent 
+			page={data.page} 
+			starships={data.starships} 
+			nb={data.nb}
+		/>;
+	} else {
+		return <LoaderStarWars/>;
+	}
+}
+
+const StarshipContent = (props) => (
+	<div>
+		<h3>Nombre de Vaisseau {props.nb}</h3>
+		<br/>
+
+		<table className="table table-hover">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Prix (crédit)</th>
+					<th>Taille (m)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<DisplayStarship starships={props.starships}/>
+			</tbody>
+		</table>
+	</div>
+)
+
+const Btn = (props) => {
+	let Previous = () => <></>;
+	let Next = () => <></>;
+
+	if (props.data.previous) {
+		Previous = PreviousBtn;
+	} 
+
+	if (props.data.next) {
+		Next = NextBtn;
+	}
+
+	return (
+		<div className="btn-group">
+			<Previous previous={props.previous}/>
+			<button className="btn btn-light" disabled>
+				Page {props.data.page}
+			</button>
+			<Next next={props.next}/>
+		</div>
+	)
+}
+
+const PreviousBtn = (props) => (
+	<button onClick={props.previous} className="btn btn-outline-primary">
+		Précédent
+	</button>
+)
+
+const NextBtn = (props) => (
+	<button onClick={props.next} className="btn btn-outline-success">
+		Suivant
+	</button>
+)

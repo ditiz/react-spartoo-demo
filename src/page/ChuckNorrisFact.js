@@ -31,7 +31,7 @@ export class ChuckNorrisFact extends Component {
   }
 
   loop = () => {
-    const time = this.state.time != 0 ? 300 : this.state.time ;
+    const time = this.state.time !== 0 ? 300 : this.state.time ;
 
     this.setState({
       loop : setInterval(() => {

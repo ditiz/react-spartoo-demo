@@ -86,7 +86,7 @@ export class Planet extends Component {
 				<br/>
 
 				<table className="table table-hover">
-					<thead className="">
+					<thead>
 						<tr>
 							<th>Nom</th>
 							<th>Taille (km)</th>
