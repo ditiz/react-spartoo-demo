@@ -64,7 +64,7 @@ export class Starship extends Component {
 		
 	render() {
 		return (
-			<div >
+			<div>
 				<Content data={this.state}/>
 				<Btn previous={() => this.previous()} next={() => this.next()} data={this.state}/>
 			</div>
@@ -76,10 +76,10 @@ const DisplayStarship = (props) => {
 	if (props.starships) {
 		return props.starships.map(starship => { 
       return <tr key={starship.name}>
-        <td>{starship.name}</td>
-        <td>{starship.cost_in_credits}</td>
-        <td>{starship.length}</td>
-      </tr>;
+			<td>{starship.name}</td>
+			<td>{starship.cost_in_credits}</td>
+			<td>{starship.length}</td>
+		</tr>;
 		});
 	} else {
 		return <div></div>;
